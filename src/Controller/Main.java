@@ -15,10 +15,9 @@ import View.Menu;
 public class Main {
     public static void main(String[] args){
         Menu menu = new Menu();
+        
         GraphMethods graphMethods = new GraphMethods();
-        
-        //ControllerMenu controller = new ControllerMenu(menu, graphMethods);
-        
+       
         menu.fijarControlador(new ControllerMenu(menu, graphMethods));
         
         menu.fijarModelo(graphMethods);

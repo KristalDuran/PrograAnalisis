@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -22,6 +23,11 @@ public class GraphMethods {
     int cantStation;
     int timeReal;
     int timeProx;
+    
+    Node node;
+    Graph graph;
+    
+    ArrayList<Node> nodes = new ArrayList<>();
     
     public GraphMethods() {
     }
@@ -83,8 +89,12 @@ public class GraphMethods {
         }
     }
     
-    public void MakeStation(int cant){
-        //validar los putnos x y en distancias razonables, y el id un contandor para esto llamar metodos de estacion
+    public void MakeStation(Integer name, int x, int y){
+        
+        node = new Node(name, x, y);
+        
+        System.out.println("name "+name+" x "+x+" y "+y);
+        nodes.add(node);
     }
     
     //definir que vertice se conecta con otro y el tama;o del arco es decir la distancia

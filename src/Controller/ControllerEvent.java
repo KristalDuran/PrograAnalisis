@@ -8,7 +8,6 @@ package Controller;
 import Model.GraphMethods;
 import Model.Restriction;
 import View.Event;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -73,8 +72,10 @@ public class ControllerEvent implements ActionListener{
             restrictionsX.add(new Restriction(x-30,x+30));
             restrictionsY.add(new Restriction(y-30,y+30));
             
+            graphMethods.MakeStation(nodesToDraw+1, x, y);
+            //nodesToDraw+1 para no iniciar en 0
             grafico.drawOval(x,y,20,20);
-            String numberOfNode = ""+ nodesToDraw;
+            String numberOfNode = ""+ nodesToDraw+1;
             grafico.drawChars(numberOfNode.toCharArray(),0, numberOfNode.toCharArray().length, x+4, y+15);
             
             //guardar en un array los puntos x+10,y+10///////////////////////////////////////////////
