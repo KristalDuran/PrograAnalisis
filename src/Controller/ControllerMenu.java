@@ -35,6 +35,8 @@ public class ControllerMenu implements ActionListener {
         
         graphMethods.setCant(Integer.parseInt(Menu.CantViaje.getText()));
         graphMethods.setSizePista(Integer.parseInt(Menu.SizePista.getText()));
+        graphMethods.setPistaHeight(Integer.parseInt(Menu.txtHeight.getText()));
+        graphMethods.setPistaWidth(Integer.parseInt(Menu.txtWidth.getText()));
         graphMethods.setCantStation(Integer.parseInt(Menu.CantStation.getText()));
         graphMethods.setTimeReal(Integer.parseInt(Menu.TimeReal.getText()));
         graphMethods.setTimeProx(Integer.parseInt(Menu.TimeProx.getText()));
@@ -56,7 +58,8 @@ public class ControllerMenu implements ActionListener {
             graphMethods.controllerAereoBacktracking();
         }
         
-        Event event = new Event();
+        Event event = new Event(graphMethods);
+        event.setCant(graphMethods.getCantStation());
         event.fijarController(new ControllerEvent(event, graphMethods));
     }
     

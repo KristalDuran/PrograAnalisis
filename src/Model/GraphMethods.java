@@ -19,14 +19,20 @@ public class GraphMethods {
     
     int idTrip = 0;
     int cantTrips;
+    int pistaHeight;
+    int pistaWidth;
     int sizePista;
+    int cantPistas;
     int cantStation;
     int timeReal;
     int timeProx;
+    int cantDronesXPista;
+    float worstTimeCase = 1000/30;//al no saber las posiciones de las pistas se debe calcular como si tuvieran que subir
+                                  //hasta la pista màs alta
     
     Node node;
     Graph graph;
-    
+    ArrayList<Integer> linesToDraw = new ArrayList();
     Node[] nodes;
     
     public GraphMethods() {
@@ -94,22 +100,19 @@ public class GraphMethods {
     public void MakeGraph(){        
         //elegir aleatoriamente el que no tenga arco, si todos tienen, elegir los mas cercanos 
         mergesort(nodes, 0, nodes.length);
-        
+        linesToDraw.clear();
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int subNode = 0; subNode < nodes.length; subNode++) {
-            System.out.println("for");
             int cantPista = sizePista - nodes[subNode].getAdjacentNodes().size();               
             
             while ( cantPista > 0) {
                 int destineNode = (int) (Math.random()*cantStation);
                 if (nodes[subNode].getName().compareTo(nodes[destineNode].getName()) != 0 ) {
                     if (arrayList.size()+1 == cantStation) { 
-                        System.out.println("Ya no hay opciones");
                         defineTheClosets(subNode);
                         break;
                     }else{   
                         if (  (nodes[destineNode].adjacentNodes.size() < 1) ){
-                            System.out.println("if");
                             addArrayTemp(destineNode, arrayList);
                             addArrayTemp(subNode, arrayList);
                             nodes[subNode].addDestination(nodes[destineNode], defineDistance(nodes[subNode], nodes[destineNode]));                                
@@ -120,7 +123,7 @@ public class GraphMethods {
                 }
             }            
         }
-        System.out.println("le "+ arrayList.size());
+        
         addGraph();
         
     }
@@ -131,12 +134,17 @@ public class GraphMethods {
         }
     }
     
-    public int defineDistance(Node origen, Node destin){        
+    public int defineDistance(Node origen, Node destin){ 
+        linesToDraw.add(origen.getX());
+        linesToDraw.add(origen.getY());
+        linesToDraw.add(destin.getX());
+        linesToDraw.add(destin.getY());
         return (int)Math.abs((origen.getX() + origen.getY()) - (destin.getX() + destin.getY()));
     }
     
     public void addGraph(){
         graph = new Graph();
+        
         for (int i = 0; i < nodes.length; i++) {
             graph.addNode(nodes[i]);
         }
@@ -263,7 +271,7 @@ public class GraphMethods {
                 break;
             }
         }
-        System.out.println(origen + " " + destino);
+        
         idTrip++;
 
     }
@@ -335,7 +343,42 @@ public class GraphMethods {
     public void setTimeProx(int timeProx) {
         this.timeProx = timeProx;
     }
+
+    public ArrayList<Integer> getLinesToDraw() {
+        return linesToDraw;
+    }
+
+    public void setLinesToDraw(ArrayList<Integer> linesToDraw) {
+        this.linesToDraw = linesToDraw;
+    }
+
+    public int getPistaHeight() {
+        return pistaHeight;
+    }
+
+    public void setPistaHeight(int pistaHeight) {
+        this.pistaHeight = pistaHeight;
+    }
+
+    public int getPistaWidth() {
+        return pistaWidth;
+    }
+
+    public void setPistaWidth(int pistaWidth) {
+        this.pistaWidth = pistaWidth;
+    }
     
+    public void setCantPistas(){
+        //500 entre el alto de la pista designado para decir cuàntas pistas de ida caben en la mitad
+        //se toma 500 metros porque por cada pista de ida tiene que haber una de vuelta
+        this.cantPistas = 500 / this.pistaHeight;
+        setCantDronesXPista();
+    }
     
-    
+    public void setCantDronesXPista(){
+        //area de la pista entre area de un drone = 6
+        this.cantDronesXPista = (this.pistaHeight*this.pistaWidth)/6;
+        
+    }
+   
 }
