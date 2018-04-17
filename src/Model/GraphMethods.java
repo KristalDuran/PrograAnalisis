@@ -84,8 +84,7 @@ public class GraphMethods {
         }
     }
     
-    public void MakeStation(Integer name, int x, int y){
-        
+    public void MakeStation(Integer name, int x, int y){        
         node = new Node(name, x, y);
         nodes[(name.intValue()-1)] = node;
     }
@@ -97,19 +96,16 @@ public class GraphMethods {
         
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int subNode = 0; subNode < nodes.length; subNode++) {
-            System.out.println("for");
             int cantPista = sizePista - nodes[subNode].getAdjacentNodes().size();               
             
             while ( cantPista > 0) {
                 int destineNode = (int) (Math.random()*cantStation);
                 if (nodes[subNode].getName().compareTo(nodes[destineNode].getName()) != 0 ) {
                     if (arrayList.size()+1 == cantStation) { 
-                        System.out.println("Ya no hay opciones");
                         defineTheClosets(subNode);
                         break;
                     }else{   
                         if (  (nodes[destineNode].adjacentNodes.size() < 1) ){
-                            System.out.println("if");
                             addArrayTemp(destineNode, arrayList);
                             addArrayTemp(subNode, arrayList);
                             nodes[subNode].addDestination(nodes[destineNode], defineDistance(nodes[subNode], nodes[destineNode]));                                
@@ -120,7 +116,7 @@ public class GraphMethods {
                 }
             }            
         }
-        System.out.println("le "+ arrayList.size());
+        
         addGraph();
         
     }
@@ -137,6 +133,7 @@ public class GraphMethods {
     
     public void addGraph(){
         graph = new Graph();
+        
         for (int i = 0; i < nodes.length; i++) {
             graph.addNode(nodes[i]);
         }
@@ -263,7 +260,7 @@ public class GraphMethods {
                 break;
             }
         }
-        System.out.println(origen + " " + destino);
+        
         idTrip++;
 
     }
@@ -335,7 +332,6 @@ public class GraphMethods {
     public void setTimeProx(int timeProx) {
         this.timeProx = timeProx;
     }
-    
     
     
 }
