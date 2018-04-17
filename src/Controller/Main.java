@@ -24,6 +24,6 @@ public class Main {
         menu.fijarControlador(new ControllerMenu(menu, graphMethods));
         
         menu.fijarModelo(graphMethods);
-        
+        System.out.println("holaMundo");
     }
 }
