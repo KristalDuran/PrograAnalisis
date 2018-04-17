@@ -39,6 +39,8 @@ public class ControllerMenu implements ActionListener {
         graphMethods.setTimeReal(Integer.parseInt(Menu.TimeReal.getText()));
         graphMethods.setTimeProx(Integer.parseInt(Menu.TimeProx.getText()));
         
+        graphMethods.setNodes();
+        
         if(Menu.jRadioButton4.isSelected()){
             //probabilistico
             graphMethods.controllerAereoProbabilistic();

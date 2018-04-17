@@ -28,14 +28,14 @@ public class ControllerEvent implements ActionListener{
         this.event = event;
         this.graphMethods = graphMethods;
         event.setVisible(true);
-        defineLocation(graphMethods.getCant());
+        defineLocation(graphMethods.getCantStation());
         
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == event.jBStart) {
-            
+            graphMethods.MakeGraph();
         } else if (e.getSource() == event.jBBack) {
             
         } else if (e.getSource() == event.jBStarError) {
@@ -75,11 +75,12 @@ public class ControllerEvent implements ActionListener{
             graphMethods.MakeStation(nodesToDraw+1, x, y);
             //nodesToDraw+1 para no iniciar en 0
             grafico.drawOval(x,y,20,20);
-            String numberOfNode = ""+ nodesToDraw+1;
+            String numberOfNode = "" + (nodesToDraw+1);
             grafico.drawChars(numberOfNode.toCharArray(),0, numberOfNode.toCharArray().length, x+4, y+15);
             
             //guardar en un array los puntos x+10,y+10///////////////////////////////////////////////
         }
+        
         
     }
     

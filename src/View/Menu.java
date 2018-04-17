@@ -68,7 +68,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel2.setText("Number of trips:");
 
-        jLabel3.setText("Track size: ");
+        jLabel3.setText("Number of arcs: ");
 
         jLabel4.setText("Number of stations:");
 
